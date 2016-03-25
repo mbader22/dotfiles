@@ -1,0 +1,34 @@
+
+alias bashrc="vim ~/.bashrc"
+alias dotfiles='vim ~/.dotfiles'
+
+#shutdown
+alias sd="sudo shutdown -h"
+alias sdc="sudo shutdown -c"
+
+#Textdateien recodieren
+alias win2lin="recode windows-1252..UTF-8"
+alias lin2win="recode UTF-8..windows-1252"
+
+alias path='echo $PATH | tr ":" "\n" | sort'    # print $path nicely
+alias mkdir='mkdir -p'                          # creat dirs recursively
+alias ..='cd ..'                                # make .. go up a folder
+alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
+alias cls='clr'                                 # clean screen
+
+# helpers (defaults)
+alias grep='grep --color=auto'                  # color grep matches
+alias count='wc -l'                             # count lines
+alias size='du -sh'                             # get folder size
+alias sizer='du -h -c'                          # get and print folder size for all folders, recursively
+alias disks='df -H -l'                          # show available disk space
+alias ip='ifconfig | grep "inet "'              # quickly print ip address
+alias ping='ping -c 5'                          # pings with 5 packets, not unlimited
+
+# git
+alias gs='git status'
+alias ga='git add -A'
+alias gp='git push origin HEAD'
+alias gd='git difftool'
+alias gc='git commit -m'
+alias gl='git log -n 20 --format="%ai  %Cgreen[%h]%Creset  [%<(12,trunc)%aN]  %s"'

@@ -1,0 +1,83 @@
+
+# navigation
+
+  mkcd () {
+          mkdir "$1"
+          cd "$1"
+  }
+
+# youtube-dl
+
+  #extracts audio from youtube videos
+    y2a(){
+            youtube-dl -ci -o "%(title)s.%(ext)s" "$@" -x
+    }
+
+  #extracts audio from youtube videos
+    y2v(){
+      youtube-dl -ci -o "%(title)s.%(ext)s" "$@"
+    }
+
+    y2mplayer(){
+      youtube-dl -q -o- ${1} | mplayer -
+    }
+
+#Bilder für Homepage vorbereiten
+  homepage(){
+    for i in *; do mv $i `echo $i | tr [:upper:] [:lower:]`; done
+    mkdir thumbs
+    gimp -i -b '(batch-homepage-large-sharpen "*.jpg" 640 480)' -b '(gimp-quit 0)'
+    notify-send 'Homepage' 'Vorschaubilder vollständig erstellt!' --icon=dialog-information
+  }
+
+#arch Linux aktualisieren
+  akt(){
+    falscheParameter="\nvon akt unterstützte Parameter:\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
+
+    if [ ${#} -eq 0 ]
+    then
+      packer-color -Syu
+    else
+      if [ ${#} -gt 1 ]
+      then
+          echo -e ${falscheParameter}
+      else
+        if [ "${1}" = "-a" ]
+        then
+                packer-color -Syyu
+        else
+                echo -e ${falscheParameter}
+        fi
+      fi
+    fi
+  }
+
+#Latex>pdf
+
+lat2pdf(){
+  ERROR="Too few arguments : no file name specified"
+
+  if [ $# -eq 0 ]
+  then
+    echo $ERROR # no args? ... print error and exit
+  else
+
+    # check that the file exists
+    if [ -f "$@" ] 
+    then
+      # if it exists then latex it twice, dvips, then ps2pdf, then remove all the unneeded files
+      pdflatex "$@"
+      pdflatex "$@"
+
+      # these lines can be appended to delete other files, such as *.out
+      rm *.aux
+      rm *.log
+      rm *.toc
+      rm *.out
+    else
+      # otherwise give this output line with a list of available tex files
+      echo -e "the file doesnt exist butthead! Choose one of these:"
+      ls *.tex
+    fi
+  fi
+}
