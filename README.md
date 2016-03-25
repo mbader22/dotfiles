@@ -1,2 +1,2 @@
 # dotfiles
-just another repositors
+First attempt of organizing my dotfiles
