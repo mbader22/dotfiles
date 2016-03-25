@@ -6,7 +6,7 @@ My Linux setup. Special thanks to whoever i stole it from.
 
 1. Clone this repository into your home folder
 
-    git clone https://github.com/AlexanderEkdahl/dotfiles.git && cd dotfiles/
+        git clone https://github.com/AlexanderEkdahl/dotfiles.git && cd dotfiles/
 
 1. Symlink files
 
