@@ -10,12 +10,12 @@ My Linux setup. Special thanks to whoever i stole it from.
 
 1. Create ~/.bash folder
 
-	mkdir ~/.bash
+        mkdir ~/.bash
 
 1. Symlink files
 
         ln -sf ~/dotfiles/bashrc ~/.bashrc
-	ln -sf ~/dotfiles/aliases ~/.bash/aliases
-	ln -sf ~/dotfiles/functions ~/.bash/functions
+        ln -sf ~/dotfiles/aliases ~/.bash/aliases
+        ln -sf ~/dotfiles/functions ~/.bash/functions
         ln -sf ~/dotfiles/vimrc ~/.vimrc
 
