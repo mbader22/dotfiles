@@ -1,7 +1,7 @@
 set ruler laststatus=2 number title hlsearch
 syntax on
 set t_Co=256
-colorscheme wombat
+colorscheme wombat256
 
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR> 
