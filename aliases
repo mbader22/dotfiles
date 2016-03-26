@@ -1,6 +1,8 @@
-
 alias bashrc="vim ~/.bashrc"
+alias vimrc="vim ~/.vimrc"
 alias dotfiles='vim ~/.dotfiles'
+
+alias :q="exit"
 
 #shutdown
 alias sd="sudo shutdown -h"
