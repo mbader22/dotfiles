@@ -1,15 +1,97 @@
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
 set ruler laststatus=2 number title hlsearch
 syntax on
 set t_Co=256
 colorscheme kolor
 
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set relativenumber
+set autoindent
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch 
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+" Be smart when using tabs ;)
+set smarttab
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR> 
 
-" Leader Mappings
-map <Space> <leader>
-map <Leader>w :update<CR>
-map <Leader>q :qall<CR>
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+nnoremap <space> /
+nnoremap <c-space> ?
+" Smart way to move between windows
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+let g:BASH_Ctrl_j = 'off'
+map <C-space> <Plug>IMAP_JumpForward
+nmap <C-space> <Plug>IMAP_JumpForward
+vmap <C-space> <Plug>IMAP_JumpForward
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z= 
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
 
 " Toggle nerdtree with F10
 map <F10> :NERDTreeToggle<CR>
@@ -17,9 +99,6 @@ map <F10> :NERDTreeToggle<CR>
 map <F9> :NERDTreeFind<CR>
 
 set showcmd       " display incomplete commands
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
 
 augroup vimrcEx
   " When editing a file, always jump to the last known cursor position.
@@ -31,13 +110,12 @@ augroup vimrcEx
     \ endif
 augroup END
 
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 " Fuzzy finder: ignore stuff that can't be opened, and generated files
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
-
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·

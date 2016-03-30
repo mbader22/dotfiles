@@ -54,7 +54,7 @@
 
 #Latex>pdf
 
-latex2pdf(){
+lat2pdf(){
   ERROR="Too few arguments : no file name specified"
 
   if [ $# -eq 0 ]
@@ -86,7 +86,7 @@ latex2pdf(){
 
 #Textdokument scannen
 
-textdokument-scannen(){
+td-scannen(){
 
 mkdir ~/bin/neuu
   notify-send 'textdokument-scannen' 'scannen abgebrochen' --icon=simple-scan
