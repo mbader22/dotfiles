@@ -30,6 +30,22 @@
     notify-send 'Homepage' 'Vorschaubilder vollständig erstellt!' --icon=dialog-information
   }
 
+#Rechnungen erstellen
+  rechnungen(){
+    if [ ${#} -eq 0 ]
+    then
+      echo ".tex Datei als Parameter angeben!"
+    else
+      if [ ${#} -eq 1 ]
+        then
+        vim ${1}
+        lat2pdf ${1}
+        exit 0
+      else
+        echo ".tex Datei als Parameter angeben!"
+      fi
+    fi
+  }
 #arch Linux aktualisieren
   akt(){
     falscheParameter="\nvon akt unterstützte Parameter:\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
