@@ -32,6 +32,11 @@ set wildignore=*.o,*~,*.pyc
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
+" Show the current mode
+set showmode
+" Show the (partial) command as it’s being typed
+set showcmd
+
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
@@ -97,8 +102,6 @@ let g:mapleader = ","
 map <F10> :NERDTreeToggle<CR>
 " Current file in nerdtree
 map <F9> :NERDTreeFind<CR>
-
-set showcmd       " display incomplete commands
 
 augroup vimrcEx
   " When editing a file, always jump to the last known cursor position.
