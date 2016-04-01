@@ -52,7 +52,8 @@
 
     if [ ${#} -eq 0 ]
     then
-      packer-color -Syu
+      #packer-color -Syu
+      packer-color -Syyu
     else
       if [ ${#} -gt 1 ]
       then
