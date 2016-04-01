@@ -1,6 +1,6 @@
 # dotfiles
 
-My Linux setup. Special thanks to whoever i stole it from.
+My Linux setup.
 
 ##Installation1.
 
