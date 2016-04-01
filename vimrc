@@ -1,3 +1,4 @@
+"set t_Co=256
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -7,10 +8,15 @@ filetype indent on
 
 set ruler laststatus=2 number title hlsearch
 syntax on
-set t_Co=256
+let g:airline_powerline_fonts = 1
+let g:kolor_italic=1 " Enable italic. Default: 1 
+let g:kolor_bold=1 " Enable bold. Default: 1 
+let g:kolor_underlined=0 " Enable underline for 'Underlined'. Default: 0 
+let g:kolor_alternative_matchparen=0 " Gray 'MatchParen' color. Default: 0 
 colorscheme kolor
 
-" Softtabs, 2 spaces
+
+"Softtabs, 2 spaces
 set tabstop=2
 set shiftwidth=2
 set expandtab
