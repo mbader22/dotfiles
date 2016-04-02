@@ -18,4 +18,5 @@ My Linux setup.
         ln -sf ~/dotfiles/aliases ~/.bash/aliases
         ln -sf ~/dotfiles/functions ~/.bash/functions
         ln -sf ~/dotfiles/vimrc ~/.vimrc
+        ln -sf ~/dotfiles/Thunar/uca.xml ~/.config/Thunar/uca.xml
 

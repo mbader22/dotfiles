@@ -1,0 +1,118 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>text-x-tex</icon>
+	<name>latex2pdf</name>
+	<unique-id>1459029870772713-5</unique-id>
+	<command>cd %d; ~/bin/latex2pdf.sh %n</command>
+	<description>konvertiert LaTex zu pdf</description>
+	<patterns>*.tex</patterns>
+	<startup-notify/>
+	<text-files/>
+</action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Terminal hier öffnen</name>
+	<unique-id>1440568655734454-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Beispiel für eine eigene Aktion</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>susers</icon>
+	<name>als root öffnen</name>
+	<unique-id>1458946808776661-3</unique-id>
+	<command>gksu mousepad %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<text-files/>
+</action>
+<action>
+	<icon>dropbox</icon>
+	<name>senden an Dropbox</name>
+	<unique-id>1450721305172474-26</unique-id>
+	<command>if zenity --question --text=&quot;%n in Dropbox kopieren?&quot;; then cp -dr %f /home/$USER/Dropbox/%n; fi</command>
+	<description></description>
+	<patterns>*</patterns>
+	<startup-notify/>
+</action>
+<action>
+	<icon>google-drive</icon>
+	<name>senden an Google Drive</name>
+	<unique-id>1450721297524779-25</unique-id>
+	<command>if zenity --question --text=&quot;%n in Google Drive kopieren?&quot;; then cp -dr %f /home/$USER/Google\ Drive/%n; fi</command>
+	<description></description>
+	<patterns>*</patterns>
+	<startup-notify/>
+</action>
+<action>
+	<icon>dropbox</icon>
+	<name>dropbox öffnen</name>
+	<unique-id>1450700056231134-20</unique-id>
+	<command>thunar /home/$USER/Dropbox/</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>google-drive</icon>
+	<name>Google Drive öffnen</name>
+	<unique-id>1450700063610220-21</unique-id>
+	<command>thunar /home/$USER/Google\ Drive/</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>application-info</icon>
+	<name>Exif Info</name>
+	<unique-id>1450719971964823-23</unique-id>
+	<command>jhead %n | zenity --text-info --title=&quot;Exif Info&quot; --width=400 --height=250</command>
+	<description>View the Exif info of the selected JPG file</description>
+	<patterns>*.jpg;*.JPG</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>image-auto-adjust</icon>
+	<name>Scan-verkleinern</name>
+	<unique-id>1451218240868592-1</unique-id>
+	<command>gimp -i -b &apos;(skript-fu-scan-verkleinern &quot;&apos;%f&apos;&quot; 1980)&apos; -b &apos;(gimp-quit 0)&apos;</command>
+	<description></description>
+	<patterns>*.png;*.PNG;*jpg;*.JPG;*.pnm</patterns>
+	<startup-notify/>
+	<image-files/>
+</action>
+<action>
+	<icon>scanner</icon>
+	<name>Textdokument scannen</name>
+	<unique-id>1459027444980111-3</unique-id>
+	<command>textdokument-scannen.sh</command>
+	<description></description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>shotwell</icon>
+	<name>thumbnails für Homepage erzeugen</name>
+	<unique-id>1457471852652692-1</unique-id>
+	<command>cd /%f; for i in *; do mv $i `echo $i | tr [:upper:] [:lower:]`; done; mkdir Kategoriename/; mkdir Kategoriename/thumbs/; gimp -i -b &apos;(batch-homepage2-sharpen &quot;*.jpg&quot; 640 480 100 100 50 50)&apos; -b &apos;(gimp-quit 0)&apos;; notify-send &apos;Homepage&apos; &apos;Vorschaubilder vollständig erstellt!&apos; --icon=dialog-information</command>
+	<description></description>
+	<patterns>*.jpg</patterns>
+	<startup-notify/>
+	<image-files/>
+</action>
+</actions>
