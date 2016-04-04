@@ -7,3 +7,4 @@ export BASH_DIR=~/.bash
 
 source $BASH_DIR/aliases
 source $BASH_DIR/functions
+eval "$(dircolors -b ~/.dircolors)"

@@ -19,4 +19,4 @@ My Linux setup.
         ln -sf ~/dotfiles/functions ~/.bash/functions
         ln -sf ~/dotfiles/vimrc ~/.vimrc
         ln -sf ~/dotfiles/Thunar/uca.xml ~/.config/Thunar/uca.xml
-
+        ln -sf ~/dotfiles/dircolors/dircolors ~/.dircolors
