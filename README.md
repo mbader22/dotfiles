@@ -20,3 +20,10 @@ My Linux setup.
         ln -sf ~/dotfiles/vimrc ~/.vimrc
         ln -sf ~/dotfiles/Thunar/uca.xml ~/.config/Thunar/uca.xml
         ln -sf ~/dotfiles/dircolors/dircolors ~/.dircolors
+
+##VIM
+
+install nerdtree
+Install ctrlp
+install vim Airline
+install nerd-fonts-git
