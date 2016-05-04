@@ -6,6 +6,7 @@
           cd "$1"
   }
 
+
 # youtube-dl
 
   #extracts audio from youtube videos
@@ -47,13 +48,14 @@
     fi
   }
 #arch Linux aktualisieren
-  akt(){
+  a(){
     falscheParameter="\nvon akt unterstützte Parameter:\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
 
     if [ ${#} -eq 0 ]
     then
       #packer-color -Syu
       packer-color -Syyu
+      notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
     else
       if [ ${#} -gt 1 ]
       then
@@ -61,7 +63,8 @@
       else
         if [ "${1}" = "-a" ]
         then
-                packer-color -Syyu
+             packer-color -Syyu
+             notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
         else
                 echo -e ${falscheParameter}
         fi
