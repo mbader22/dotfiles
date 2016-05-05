@@ -20,6 +20,7 @@ My Linux setup.
         ln -sf ~/dotfiles/vimrc ~/.vimrc
         ln -sf ~/dotfiles/Thunar/uca.xml ~/.config/Thunar/uca.xml
         ln -sf ~/dotfiles/dircolors/dircolors ~/.dircolors
+        ln -sf ~/dotfiles/Terminal/terminalrc ~/.config/xfce4/terminal/terminalrc
 
 ##VIM
 
