@@ -24,7 +24,4 @@ My Linux setup.
 
 ##VIM
 
-install nerdtree
-Install ctrlp
-install vim Airline
-install nerd-fonts-git
+        pacaur -S vim-nerdtree vim-ctrlp vim-airline vim-airline-themes nerd-fonts-git
