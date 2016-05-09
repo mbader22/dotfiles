@@ -15,6 +15,7 @@ My Linux setup.
 1. Symlink files
 
         ln -sf ~/dotfiles/bashrc ~/.bashrc
+        ls -sf ~/dotfiles/zshrc ~/.zshrc
         ln -sf ~/dotfiles/aliases.zsh ~/.bash/aliases.zsh
         ln -sf ~/dotfiles/functions.zsh ~/.bash/functions.zsh
         ln -sf ~/dotfiles/vimrc ~/.vimrc
