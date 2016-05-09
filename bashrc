@@ -5,6 +5,6 @@ fi
 
 export BASH_DIR=~/.bash
 
-source $BASH_DIR/aliases
-source $BASH_DIR/functions
+source $BASH_DIR/aliases.zsh
+source $BASH_DIR/functions.zsh
 eval "$(dircolors -b ~/.dircolors)"
