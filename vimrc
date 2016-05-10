@@ -72,6 +72,9 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cnoremap w!! w !sudo tee > /dev/null %
+
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR> 
 
