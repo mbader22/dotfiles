@@ -65,6 +65,7 @@
         then
              packer-color -Syyu
              notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
+             exit 0
         else
                 echo -e ${falscheParameter}
         fi
