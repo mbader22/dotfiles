@@ -1,6 +1,6 @@
 #!/bin/zsh
 ############################
-# .make.sh
+# makesl.sh
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
 
@@ -11,15 +11,23 @@ files=('zsh/aliases.zsh' 'zsh/functions.zsh' 'bashrc' 'vimrc' 'zshrc' 'config/Th
 
 ##########
 
+# create dotfiles_old in homedir
+olddir=~/dotfiles_old             # old dotfiles backup directory
+echo "Creating $olddir for backup of any existing dotfiles in ~"
+mkdir -p $olddir
+echo "...done\n"
+
 # change to the dotfiles directory
 echo "Changing to the $dir directory"
 cd $dir
-echo "...done"
+echo "...done\n"
 
 # create symlinks
 for file in $files; do
+  echo "Moving any existing dotfiles from ~ to $olddir"
+  mv ~/.$file ~/dotfiles_old/
   echo "Creating symlink to $file in home directory."
   ln -s $dir/$file ~/.$file
 done
 
-echo "...done"
+echo "...done\n"

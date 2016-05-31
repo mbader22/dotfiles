@@ -2,7 +2,7 @@
 
 My Linux setup.
 
-##Installation1.
+##Installation
 
 1. Clone this repository into your home folder
 
@@ -10,8 +10,8 @@ My Linux setup.
 
 1. Symlink files
 
-        . ~/dotfiles/makesl.sh
+        . ~/dotfiles/makesymlinks.sh
 
 ##VIM
 
-        pacaur -S vim-nerdtree vim-ctrlp vim-airline vim-airline-themes nerd-fonts-git vim-kolor
+        pacaur -S vim-nerdtree vim-ctrlp vim-airline vim-airline-themes nerd-fonts-git vim-kolor zsh oh-my-zsh-git
