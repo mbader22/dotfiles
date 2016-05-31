@@ -115,4 +115,14 @@
 	<startup-notify/>
 	<image-files/>
 </action>
+<action>
+	<icon>shotwell</icon>
+	<name>surface sharpen</name>
+	<unique-id>1464685561946965-7</unique-id>
+	<command>cd /%f; for i in *; do mv $i `echo $i | tr [:upper:] [:lower:]`; done; mkdir surface/; gimp -i -b &apos;(batch-surface-sharpen &quot;*.jpg&quot; &quot;surface/&quot;)&apos; -b &apos;(gimp-quit 0)&apos;; notify-send &apos;Homepage&apos; &apos;Vorschaubilder vollständig erstellt!&apos; --icon=dialog-information</command>
+	<description></description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<image-files/>
+</action>
 </actions>

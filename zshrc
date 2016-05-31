@@ -88,6 +88,6 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-source ~/.bash/aliases.zsh
-source ~/.bash/functions.zsh
+source ~/.zsh/aliases.zsh
+source ~/.zsh/functions.zsh
 eval `dircolors ~/.dircolors`
