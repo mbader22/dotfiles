@@ -10,7 +10,7 @@ My Linux setup.
 
 1. Symlink files
 
-        .~/dotfiles/makesl.sh
+        . ~/dotfiles/makesl.sh
 
 ##VIM
 
