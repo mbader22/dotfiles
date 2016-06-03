@@ -21,19 +21,27 @@ folders=('gimp-2.8/scripts')
 
 # create dotfiles_old in homedir
 olddir=~/dotfiles_old             # old dotfiles backup directory
-if [[ ! -L ~/.$file ]]
+if [[ ! -d $olddir ]]
 then
-  echo "$create $highlight$olddir$default] Creating for backup of any existing dotfiles in ~"
+  if [[ ! -a $olddir ]]
+  then
+    echo "$create $highlight$olddir$default] Creating for backup of any existing dotfiles in ~"
+    mkdir -p $olddir
+    echo "...done\n"
+  else
+    echo "$error] $highlight$olddir$default already exists and is not an directory"
+    echo "$error] rename or remove file $highlight$olddir$default before starting this symlink script"
+    echo "$error] exiting without symlinking the dotfiles"
+    exit 1
+  fi
 else
   echo "$idle Folder $highlight$olddir$default for backup already exists"
 fi
-mkdir -p $olddir
-echo "...done\n"
 
 # change to the dotfiles directory
-echo "Changing to the $dir directory"
-cd $dir
-echo "...done\n"
+#echo "Changing to the $dir directory"
+#cd $dir
+#echo "...done\n"
 
 # create symlinks
 for file in $files; do
