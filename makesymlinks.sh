@@ -49,17 +49,31 @@ for file in $files; do
   then
     if [[ ! -L ~/.$file ]]
     then
-      echo "$move $highlight~/.$file$default] Move from ~ to $olddir"
-      mv ~/.$file $olddir/
+      if [[ -f ~/$file ]]
+      then
+        echo "$move $highlight~/.$file$default] Move from ~ to $olddir"
+        mv ~/.$file $olddir/
+        echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+        ln -s $dir/$file ~/.$file
+      else
+        if [[ -d ~/$file ]]
+        then
+          echo "$error $highlight~/.$file$default] ~/.$file is a directory and not a file. Can't make a symlink"
+        else
+          echo "$error $highlight~/.$file$default] ~/.$file is not a symlink, or file, or directory. Can't make a Symlink"
+        fi
+      fi
     else
       echo "$delete $highlight~/.$file$default] is a symlink and will be deletet"
       rm ~/.$file
+      echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+      ln -s $dir/$file ~/.$file
     fi
   else
     echo "$info $highlight~/.$file$default] file doesnt exist"
+    echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+    ln -s $dir/$file ~/.$file
   fi
-  echo "$create $highlight~/.$file$default] Creating symlink in home directory"
-  ln -s $dir/$file ~/.$file
 done
 
 # create symlinks
@@ -89,7 +103,10 @@ for folder in $folders; do
       ln -s -r $dir/$folder/ ~/.${folder%/*}/
     fi
   else
-    echo "$idle symlink to $highlight$folder$default already exists"
+      echo "$delete $highlight~/.$folder$default] is a symlink and will be deletet"
+      rm -r ~/.$folder
+      echo "$create $highlight~/.$folder$default] Creating symlink in home directory"
+      ln -s -r $dir/$folder/ ~/.${folder%/*}/
   fi
 done
 
