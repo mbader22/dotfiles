@@ -6,15 +6,21 @@ set history=500
 filetype plugin on
 filetype indent on
 
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
+set background=dark
+set encoding=utf-8
+
 set ruler laststatus=2 number title hlsearch
-syntax on
 let g:airline_powerline_fonts = 1
 let g:kolor_italic=1 " Enable italic. Default: 1
 let g:kolor_bold=1 " Enable bold. Default: 1
 let g:kolor_underlined=0 " Enable underline for 'Underlined'. Default: 0
 let g:kolor_alternative_matchparen=0 " Gray 'MatchParen' color. Default: 0
-colorscheme kolor
-
+"colorscheme kolor
+colorscheme wombat256
+syntax on
+"colorscheme mustang
 
 "Softtabs, 2 spaces
 set tabstop=2
@@ -128,11 +134,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Fuzzy finder: ignore stuff that can't be opened, and generated files
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
-set background=dark
-set encoding=utf-8
 
 " Tab completion
 " will insert tab at beginning of line,
