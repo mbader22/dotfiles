@@ -110,4 +110,4 @@ for folder in $folders; do
   fi
 done
 
-echo "...done\n"
+echo "...done"

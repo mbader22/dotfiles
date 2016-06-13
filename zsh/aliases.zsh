@@ -1,8 +1,8 @@
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
-alias aliases="vim ~/dotfiles/aliases.zsh"
-alias functions="vim ~/dotfiles/functions.zsh"
+alias aliases="vim ~/dotfiles/zsh/aliases.zsh"
+alias functions="vim ~/dotfiles/zsh/functions.zsh"
 alias m="mplayer"
 
 # Easier navigation: .., ..., ...., ....., ~ and -
