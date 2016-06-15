@@ -1,8 +1,8 @@
 #dotfiles
 
-This are not only my dotfiles. Its the setup, i like to start with, when i install Linux on a new machine.
+This are not only my dotfiles. Its the setup i like to start with, when i install Linux on a new machine.
 
-My favorit distribution is Antergos, with the xfce desktop. The goal of this project is, to be able to make a complete Setup, with just one command, after installing Antergos with xfce desktop.
+My favorit distribution is Antergos, with the xfce desktop. The goal of this project is, to be able to make a complete Setup with just one command, after installing Antergos with xfce desktop.
 
 The screenshot below shows my desktop with zsh and vim started.
 
