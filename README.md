@@ -18,4 +18,4 @@ My Linux setup.
 
 ##Programs
 
-        pacaur -S --needed gimp inkscape google-chrome thunderbird xfce4-whiskermenu-plugin xfce4-volumed octave libreoffice-still libreoffice-still-de pdfshuffler simple-scan :gutenprint audacious meld
+        pacaur -S --needed gimp inkscape google-chrome thunderbird xfce4-whiskermenu-plugin xfce4-volumed octave libreoffice-still libreoffice-still-de pdfshuffler simple-scan gutenprint audacious meld

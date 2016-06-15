@@ -14,7 +14,7 @@ highlight="\e[97m"
 default="\e[0m"
 ########## Variables
 
-ending="desktop"
+ending='desktop'
 
 dir=~/dotfiles                    # dotfiles directory
 files=('zsh/aliases.zsh' 'zsh/functions.zsh' 'bashrc' 'vimrc' 'zshrc' 'config/Thunar/uca.xml' 'dircolors' 'config/xfce4/terminal/terminalrc' 'local/share/Thunar/sendto/compare.desktop' 'local/share/Thunar/sendto/print.desktop')    # list of files/folders to symlink in homedir
