@@ -5,17 +5,19 @@
 ############################
 
 error="[\e[31merror\e[0m"
-info="[\e[32minfo\e[0m"
-move="[\e[32mmove\e[0m"
+info="[\e[32minfo  \e[0m"
+move="[\e[32mmove  \e[0m"
 delete="[\e[32mdelete\e[0m"
 create="[\e[32mcreate\e[0m"
-idle="[\e[32midle\e[0m]"
+idle="[\e[32midle  \e[0m"
 highlight="\e[97m"
 default="\e[0m"
 ########## Variables
 
+ending="desktop"
+
 dir=~/dotfiles                    # dotfiles directory
-files=('zsh/aliases.zsh' 'zsh/functions.zsh' 'bashrc' 'vimrc' 'zshrc' 'config/Thunar/uca.xml' 'dircolors' 'config/xfce4/terminal/terminalrc')    # list of files/folders to symlink in homedir
+files=('zsh/aliases.zsh' 'zsh/functions.zsh' 'bashrc' 'vimrc' 'zshrc' 'config/Thunar/uca.xml' 'dircolors' 'config/xfce4/terminal/terminalrc' 'local/share/Thunar/sendto/compare.desktop' 'local/share/Thunar/sendto/print.desktop')    # list of files/folders to symlink in homedir
 folders=('gimp-2.8/scripts')
 ##########
 
@@ -29,13 +31,13 @@ then
     mkdir -p $olddir
     echo "...done\n"
   else
-    echo "$error] $highlight$olddir$default already exists and is not an directory"
-    echo "$error] rename or remove file $highlight$olddir$default before starting this symlink script"
+    echo "$error $highlight$olddir$default] $highlight$olddir$default  already exists and is not an directory"
+    echo "$error $highlight$olddir$default] rename or remove file $highlight$olddir$default before starting this symlink script"
     echo "$error] exiting without symlinking the dotfiles"
     exit 1
   fi
 else
-  echo "$idle Folder $highlight$olddir$default for backup already exists"
+  echo "$idle $highlight$olddir$default] Directory for backup already exists"
 fi
 
 # change to the dotfiles directory
@@ -54,13 +56,23 @@ for file in $files; do
         echo "$move $highlight~/.$file$default] Move from ~ to $olddir"
         mv ~/.$file $olddir/
         echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+        mkdir -p ~/.${file%/*}
         ln -s $dir/$file ~/.$file
       else
         if [[ -d ~/$file ]]
         then
           echo "$error $highlight~/.$file$default] ~/.$file is a directory and not a file. Can't make a symlink"
         else
-          echo "$error $highlight~/.$file$default] ~/.$file is not a symlink, or file, or directory. Can't make a Symlink"
+          if [[ ${file##*.} -eq $ending ]]
+          then
+            echo "$move $highlight~/.$file$default] Move from ~ to $olddir"
+            mv ~/.$file $olddir/
+            echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+            mkdir -p ~/.${file%/*}
+            ln -s $dir/$file ~/.$file
+          else
+            echo "$error $highlight~/.$file$default] ~/.$file is not a symlink, or file, or directory. Can't make a Symlink"
+          fi
         fi
       fi
     else
@@ -83,7 +95,7 @@ for folder in $folders; do
     echo "$create $highlight~/.$folder/$default] Creating Directory"
     mkdir $olddir/${folder%/*}
   else
-    echo "$idle Directory $highlight~/.$folder/$default already exists"
+    echo "$idle $highlight~/.$folder/$default] Directory already exists"
   fi
   if [[ ! -L ~/.$folder ]]
   then
@@ -103,10 +115,10 @@ for folder in $folders; do
       ln -s -r $dir/$folder/ ~/.${folder%/*}/
     fi
   else
-      echo "$delete $highlight~/.$folder$default] is a symlink and will be deletet"
-      rm -r ~/.$folder
-      echo "$create $highlight~/.$folder$default] Creating symlink in home directory"
-      ln -s -r $dir/$folder/ ~/.${folder%/*}/
+    echo "$delete $highlight~/.$folder$default] is a symlink and will be deletet"
+    rm -r ~/.$folder
+    echo "$create $highlight~/.$folder$default] Creating symlink in home directory"
+    ln -s -r $dir/$folder/ ~/.${folder%/*}/
   fi
 done
 

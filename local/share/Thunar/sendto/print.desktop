@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Encoding=UTF-8
+Name=Default Printer
+Name[de]=Standard-Drucker
+Exec=lp -o media=a4 %F
+Icon=printer
+MimeType=text/plain;text/txt;text/html;
