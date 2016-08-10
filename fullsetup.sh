@@ -3,7 +3,7 @@
 ~/dotfiles/makesymlinks.sh
 
 echo  "software installieren/deinstallieren (j/N)?"
-read response
+read -k 1 response
 
 if [ "$response" = "j" ]; then
 
