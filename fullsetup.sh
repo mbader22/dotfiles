@@ -2,7 +2,9 @@
 
 ~/dotfiles/makesymlinks.sh
 
-read -p "software installieren/deinstallieren (j/N)?" response
+echo  "software installieren/deinstallieren (j/N)?"
+read response
+
 if [ "$response" == "j" ]; then
   pacaur -S --needed --noedit --noconfirm vim-nerdtree vim-ctrlp vim-airline vim-airline-themes nerd-fonts-git zsh vim-wombat oh-my-zsh-git
 
