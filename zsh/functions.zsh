@@ -1,4 +1,3 @@
-
 # navigation
 
 mkcd () {
@@ -6,6 +5,13 @@ mkcd () {
   cd "$1"
 }
 
+# github
+dotfilesCloneFromGithub2local(){
+  sudo rm -r ~/dotfiles
+  cd ~/
+  git clone https://github.com/mbader22/dotfiles.git
+  . ~/dotfiles/fullsetup.sh
+}
 
 # youtube-dl
 
@@ -54,7 +60,7 @@ a(){
   if [ ${#} -eq 0 ]
   then
     #packer-color -Syu
-    packer-color -Syyu
+    packer-color -Syyu -noconfirm -noedit
     notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
     exit 0
   else
@@ -65,7 +71,7 @@ a(){
     else
       if [ "${1}" = "-a" ]
       then
-        packer-color -Syyu
+        packer-color -Syyu -noconfirm -noedit
         notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
         exit 0
       else
