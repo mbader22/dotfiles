@@ -60,7 +60,7 @@ a(){
   if [ ${#} -eq 0 ]
   then
     #packer-color -Syu
-    packer-color -Syyu -noconfirm -noedit
+    packer-color -Syyu --noconfirm --noedit
     notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
     exit 0
   else
@@ -71,7 +71,7 @@ a(){
     else
       if [ "${1}" = "-a" ]
       then
-        packer-color -Syyu -noconfirm -noedit
+        packer-color -Syyu --noconfirm --noedit
         notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
         exit 0
       else
