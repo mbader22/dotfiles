@@ -53,6 +53,15 @@ rechnungen(){
     fi
   fi
 }
+
+#arch Linux aktualisieren und System herunterfahren
+asd(){
+  packer-color -Syyu --noconfirm --noedit
+  if (($? == 0))
+  then
+    sudo shutdown -h now
+  fi
+}
 #arch Linux aktualisieren
 a(){
   falscheParameter="\nvon akt unterstützte Parameter:\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
