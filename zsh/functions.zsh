@@ -59,7 +59,7 @@ asd(){
   packer-color -Syyu --noconfirm --noedit
   if (($? == 0))
   then
-    sudo shutdown -h now
+    xfce4-session-logout -h
   fi
 }
 #arch Linux aktualisieren
