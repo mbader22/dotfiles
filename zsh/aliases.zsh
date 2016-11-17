@@ -12,9 +12,6 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 
-# Shortcuts
-alias r="cd ~/Documents/Arbeiten/Rechnungen/2016"
-
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color"
@@ -22,6 +19,8 @@ if ls --color > /dev/null 2>&1; then # GNU `ls`
         colorflag="-G"
         fi
 
+# temporarily resize \tmp
+alias resizetmp="sudo mount -o remount,size=4G,noatime /tmp"
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
 

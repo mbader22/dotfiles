@@ -64,28 +64,37 @@ asd(){
 }
 #arch Linux aktualisieren
 a(){
-  falscheParameter="\nvon akt unterstützte Parameter:\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
+  readonly A_FALSCHE_PARAMETER="von a unterstützte Parameter:\n\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
 
-  if [ ${#} -eq 0 ]
-  then
+  if [ ${#} -eq 0 ] ; then
     #packer-color -Syu
     packer-color -Syyu --noconfirm --noedit
-    notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
-    exit 0
+    if [ "$?" = 0 ] ; then
+      notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
+      exit 0
+    else
+      notify-send 'Software aktualisieren' 'Systemupdate gescheitert' --icon=system-software-update
+      return 1
+    fi
   else
     if [ ${#} -gt 1 ]
     then
-      echo -e ${falscheParameter}
-      exit 1
+      echo -e ${A_FALSCHE_PARAMETER}
+      return 1
     else
       if [ "${1}" = "-a" ]
       then
         packer-color -Syyu --noconfirm --noedit
-        notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
-        exit 0
+        if [ $? = 0 ] ; then
+          notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
+          exit 0
+        else
+          notify-send 'Software aktualisieren' 'Systemupdate gescheitert' --icon=system-software-update
+          return 1
+        fi
       else
-        echo -e ${falscheParameter}
-        exit 1
+        echo -e ${A_FALSCHE_PARAMETER}
+        return 1
       fi
     fi
   fi

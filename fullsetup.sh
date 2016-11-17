@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 
 source ~/dotfiles/makesymlinks.sh
 makesymlinks
