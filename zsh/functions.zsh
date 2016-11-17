@@ -6,11 +6,24 @@ mkcd () {
 }
 
 # github
-dotfilesCloneFromGithub2local(){
-  sudo rm -r ~/dotfiles
-  cd ~/
-  git clone https://github.com/mbader22/dotfiles.git
-  . ~/dotfiles/fullsetup.sh
+getDotfilesFromGithub(){
+  cd ~/dotfiles
+  git update-index -q --refresh
+  CHANGED=$(git diff-index --name-only HEAD --)
+  if [ ! -z "$CHANGED" ] ; then
+    gs
+    echo "\nlokale Änderungen noch nicht mit Github synchronisiert!"
+    return 1
+  else
+    sudo rm -r ~/dotfiles
+    if [ $? = 0 ] ; then
+      cd ~/
+      git clone https://github.com/mbader22/dotfiles.git
+      . ~/dotfiles/fullsetup.sh
+    else
+      return 1
+    fi
+  fi
 }
 
 # youtube-dl

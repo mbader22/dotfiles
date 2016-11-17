@@ -21,6 +21,7 @@ if ls --color > /dev/null 2>&1; then # GNU `ls`
 
 # temporarily resize \tmp
 alias resizetmp="sudo mount -o remount,size=4G,noatime /tmp"
+
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
 
