@@ -1,125 +1,127 @@
 #!/bin/zsh
+
+
 ############################
-# makesymlinks.sh
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# Name: makesymlinks.sh
+# Brief: This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# Author: cunda2@outlook.com
 ############################
 
-error="[\e[31merror\e[0m"
-info="[\e[32minfo  \e[0m"
-move="[\e[32mmove  \e[0m"
-delete="[\e[32mdelete\e[0m"
-create="[\e[32mcreate\e[0m"
-idle="[\e[32midle  \e[0m"
-highlight="\e[97m"
-default="\e[0m"
-########## Variables
 
-ending='desktop'
 
-dir=~/dotfiles                    # dotfiles directory
-files=('zsh/aliases.zsh' 'zsh/functions.zsh' 'bashrc' 'vimrc' 'zshrc' 'config/Thunar/uca.xml' 'dircolors' 'config/xfce4/terminal/terminalrc')    # list of files/folders to symlink in homedir
-folders=('gimp-2.8/scripts' 'local/share/fonts' 'local/share/Thunar/sendto')
-##########
+
+########## Constants ##########
+readonly MS_ERROR="[\e[31merror\e[0m"
+readonly MS_INFO="[\e[32minfo  \e[0m"
+readonly MS_MOVE="[\e[32mmove  \e[0m"
+readonly MS_DELETE="[\e[32mdelete\e[0m"
+readonly MS_CREATE="[\e[32mcreate\e[0m"
+readonly MS_IDLE="[\e[32midle  \e[0m"
+readonly MS_HIGHLIGHT="\e[97m"
+readonly MS_DEFAULT="\e[0m"
+
+readonly MS_ENDING='desktop'
+
+readonly MS_DIR=~/dotfiles                    # dotfiles directory
+readonly MS_FILES=('zsh/aliases.zsh' 'zsh/functions.zsh' 'bashrc' 'vimrc' 'zshrc' 'config/Thunar/uca.xml' 'dircolors' 'config/xfce4/terminal/terminalrc')    # list of files/folders to symlink in homedir
+readonly MS_FOLDERS=('gimp-2.8/scripts' 'local/share/fonts' 'local/share/Thunar/sendto')
 
 # create dotfiles_old in homedir
-olddir=~/dotfiles_old             # old dotfiles backup directory
-if [[ ! -d $olddir ]]
-then
-  if [[ ! -a $olddir ]]
-  then
-    echo "$create $highlight$olddir$default] Creating for backup of any existing dotfiles in ~"
-    mkdir -p $olddir
+readonly MS_OLDDIR=~/dotfiles_old             # old dotfiles backup directory
+###############################
+
+
+
+
+
+if [[ ! -d $MS_OLDDIR ]] ; then
+  if [[ ! -a $MS_OLDDIR ]] ; then
+    echo "$MS_CREATE $MS_HIGHLIGHT$MS_OLDDIR$MS_DEFAULT] Creating for backup of any existing dotfiles in ~"
+    mkdir -p $MS_OLDDIR
     echo "...done\n"
   else
-    echo "$error $highlight$olddir$default] $highlight$olddir$default  already exists and is not an directory"
-    echo "$error $highlight$olddir$default] rename or remove file $highlight$olddir$default before starting this symlink script"
-    echo "$error] exiting without symlinking the dotfiles"
+    echo "$MS_ERROR $MS_HIGHLIGHT$MS_OLDDIR$MS_DEFAULT] $MS_HIGHLIGHT$MS_OLDDIR$MS_DEFAULT  already exists and is not an directory"
+    echo "$MS_ERROR $MS_HIGHLIGHT$MS_OLDDIR$MS_DEFAULT] rename or remove file $MS_HIGHLIGHT$MS_OLDDIR$MS_DEFAULT before starting this symlink script"
+    echo "$MS_ERROR] exiting without symlinking the dotfiles"
     exit 1
   fi
 else
-  echo "$idle $highlight$olddir$default] Directory for backup already exists"
+  echo "$MS_IDLE $MS_HIGHLIGHT$MS_OLDDIR$MS_DEFAULT] Directory for backup already exists"
 fi
 
 # change to the dotfiles directory
-#echo "Changing to the $dir directory"
-#cd $dir
+#echo "Changing to the $MS_DIR directory"
+#cd $MS_DIR
 #echo "...done\n"
 
 # create symlinks
-for file in $files; do
-  if [[ -e ~/.$file ]]
-  then
-    if [[ ! -L ~/.$file ]]
-    then
-      if [[ -f ~/$file ]]
-      then
-        echo "$move $highlight~/.$file$default] Move from ~ to $olddir"
-        mv ~/.$file $olddir/
-        echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+for file in $MS_FILES; do
+  if [[ -e ~/.$file ]] ; then
+    if [[ ! -L ~/.$file ]] ; then
+      if [[ -f ~/$file ]] ; then
+        echo "$move $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Move from ~ to $MS_OLDDIR"
+        mv ~/.$file $MS_OLDDIR/
+        echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home directory"
         mkdir -p ~/.${file%/*}
-        ln -s -f $dir/$file ~/.$file
+        ln -s -f $MS_DIR/$file ~/.$file
       else
-        if [[ -d ~/$file ]]
-        then
-          echo "$error $highlight~/.$file$default] ~/.$file is a directory and not a file. Can't make a symlink"
+        if [[ -d ~/$file ]] ; then
+          echo "$MS_ERROR $MS_HIGHLIGHT~/.$file$MS_DEFAULT] ~/.$file is a directory and not a file. Can't make a symlink"
         else
-          if [[ ${file##*.} -eq $ending ]]
-          then
-            echo "$move $highlight~/.$file$default] Move from ~ to $olddir"
-            mv ~/.$file $olddir/
-            echo "$create $highlight~/.$file$default] Creating symlink in home directory"
+          if [[ ${file##*.} -eq $MS_ENDING ]] ; then
+            echo "$move $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Move from ~ to $MS_OLDDIR"
+            mv ~/.$file $MS_OLDDIR/
+            echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home directory"
             mkdir -p ~/.${file%/*}
-            ln -s -f $dir/$file ~/.$file
+            ln -s -f $MS_DIR/$file ~/.$file
           else
-            echo "$error $highlight~/.$file$default] ~/.$file is not a symlink, or file, or directory. Can't make a Symlink"
+            echo "$MS_ERROR $MS_HIGHLIGHT~/.$file$MS_DEFAULT] ~/.$file is not a symlink, or file, or directory. Can't make a Symlink"
           fi
         fi
       fi
     else
-      echo "$delete $highlight~/.$file$default] is a symlink and will be deletet"
+      echo "$MS_DELETE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] is a symlink and will be deletet"
       rm ~/.$file
-      echo "$create $highlight~/.$file$default] Creating symlink in home directory"
-      ln -s -f $dir/$file ~/.$file
+      echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home MS_DIRectory"
+      ln -s -f $MS_DIR/$file ~/.$file
     fi
   else
-    echo "$info $highlight~/.$file$default] file doesnt exist"
-    echo "$create $highlight~/.$file$default] Creating symlink in home directory"
-    ln -s -f $dir/$file ~/.$file
+    echo "$MS_INFO $MS_HIGHLIGHT~/.$file$MS_DEFAULT] file doesnt exist"
+    echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home directory"
+    ln -s -f $MS_DIR/$file ~/.$file
   fi
 done
 
 # create symlinks
-for folder in $folders; do
-  if [[ ! -d $olddir/${folder%/*} ]]
-  then
-    echo "$create $highlight~/.$folder/$default] Creating Directory"
-    mkdir -p $olddir/${folder%/*}
+for folder in $MS_FOLDERS; do
+  if [[ ! -d $MS_OLDDIR/${folder%/*} ]] ; then
+    echo "$MS_CREATE $MS_HIGHLIGHT~/.$folder/$MS_DEFAULT] Creating Directory"
+    mkdir -p $MS_OLDDIR/${folder%/*}
   else
-    echo "$idle $highlight~/.$folder/$default] Directory already exists"
+    echo "$MS_IDLE $MS_HIGHLIGHT~/.$folder/$MS_DEFAULT] Directory already exists"
   fi
-  if [[ ! -L ~/.$folder ]]
-  then
+  if [[ ! -L ~/.$folder ]] ; then
     if [[ -e ~/.$folder ]]
     then
-      if [[ -d ~/.$folder ]]
-      then
-        echo "$move $highlight~/.$folder$default] Move from ~/.$folder/ to $olddir"
-        mv ~/.$folder/ $olddir/$folder
-        echo "$create $highlight$folder$default] Creating Symlink ~/.${folder%/*}/"
-        ln -s -f -r $dir/$folder/ ~/.${folder%/*}/
+      if [[ -d ~/.$folder ]] ; then
+        echo "$MS_MOVE $MS_HIGHLIGHT~/.$folder$MS_DEFAULT] Move from ~/.$folder/ to $MS_OLDDIR"
+        mv ~/.$folder/ $MS_OLDDIR/$folder
+        echo "$MS_CREATE $MS_HIGHLIGHT$folder$MS_DEFAULT] Creating Symlink ~/.${folder%/*}/"
+        ln -s -f -r $MS_DIR/$folder/ ~/.${folder%/*}/
       else
-        echo "$error $highlight$folder$default] file already exists but its not a Folder!"
+        echo "$MS_ERROR $MS_HIGHLIGHT$folder$MS_DEFAULT] file already exists but its not a Folder!"
       fi
     else
-      echo "$create $highlight$folder$default] Creating Symlink ~/.${folder%/*}/"
-      ln -s -f -r $dir/$folder/ ~/.${folder%/*}/
+      echo "$MS_CREATE $MS_HIGHLIGHT$folder$MS_DEFAULT] Creating Symlink ~/.${folder%/*}/"
+      ln -s -f -r $MS_DIR/$folder/ ~/.${folder%/*}/
     fi
   else
-    echo "$delete $highlight~/.$folder$default] is a symlink and will be deletet"
+    echo "$MS_DELETE $MS_HIGHLIGHT~/.$folder$MS_DEFAULT] is a symlink and will be deletet"
     rm -r ~/.$folder
-    echo "$create $highlight~/.$folder$default] Creating symlink ~/.${folder%/*}/"
-    ln -s -f -r $dir/$folder/ ~/.${folder%/*}/
+    echo "$MS_CREATE $MS_HIGHLIGHT~/.$folder$MS_DEFAULT] Creating symlink ~/.${folder%/*}/"
+    ln -s -f -r $MS_DIR/$folder/ ~/.${folder%/*}/
   fi
 done
 
 echo "...done"
+exit 0
