@@ -82,7 +82,7 @@ function makesymlinks(){
       else
         echo "$MS_DELETE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] is a symlink and will be deletet"
         rm ~/.$file
-        echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home MS_DIRectory"
+        echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home directory"
         ln -s -f $MS_DIR/$file ~/.$file
       fi
     else
