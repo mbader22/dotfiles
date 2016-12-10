@@ -12,6 +12,9 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 
+
+# expand /tmp directory temporarily
+alias tmpResizeTo4M="sudo mount -o remount,size=4G,noatime /tmp"
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color"

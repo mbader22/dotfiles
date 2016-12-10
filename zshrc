@@ -53,7 +53,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 
