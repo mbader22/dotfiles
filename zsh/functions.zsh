@@ -18,16 +18,15 @@ getDotfilesFromGithub(){
     then
       [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
     fi
-
-    sudo rm -r ~/dotfiles
-    if [ $? = 0 ] ; then
-      cd ~/
-      git clone https://github.com/mbader22/dotfiles.git
-      . ~/dotfiles/fullsetup.sh
-      return 0
-    else
-      return 1
-    fi
+  fi
+  sudo rm -r ~/dotfiles
+  if [ $? = 0 ] ; then
+    cd ~/
+    git clone https://github.com/mbader22/dotfiles.git
+    . ~/dotfiles/fullsetup.sh
+    return 0
+  else
+    return 1
   fi
 }
 
