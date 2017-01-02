@@ -13,8 +13,8 @@ getDotfilesFromGithub(){
   if [ ! -z "$CHANGED" ] ; then
     gs
     echo "\nlokale Änderungen noch nicht mit Github synchronisiert!"
-    read "antwort?Trotzdem fortfahren (Y|n)?"
-    if [[ "$antwort" =~ ^[Yy]$ ]]
+    read "brave?Trotzdem fortfahren (Y|n)?"
+    if [[ "$brave" =~ ^[Yy]$ ]]
     then
       [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
     fi
