@@ -68,7 +68,7 @@ function makesymlinks(){
           if [[ -d ~/$file ]] ; then
             echo "$MS_ERROR $MS_HIGHLIGHT~/.$file$MS_DEFAULT] ~/.$file is a directory and not a file. Can't make a symlink"
           else
-            if [[ ${file##*.} -eq $MS_ENDING ]] ; then
+            if [[ "${file}" == "*.$MS_ENDING" ]] ; then
               echo "$move $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Move from ~ to $MS_OLDDIR"
               mv ~/.$file $MS_OLDDIR/
               echo "$MS_CREATE $MS_HIGHLIGHT~/.$file$MS_DEFAULT] Creating symlink in home directory"
