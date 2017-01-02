@@ -13,8 +13,12 @@ getDotfilesFromGithub(){
   if [ ! -z "$CHANGED" ] ; then
     gs
     echo "\nlokale Änderungen noch nicht mit Github synchronisiert!"
-    return 1
-  else
+    read "antwort?Trotzdem fortfahren (Y|n)?"
+    if [[ "$antwort" =~ ^[Yy]$ ]]
+    then
+      [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+    fi
+
     sudo rm -r ~/dotfiles
     if [ $? = 0 ] ; then
       cd ~/
@@ -147,108 +151,108 @@ lat2pdf(){
 #Textdokument scannen
 
 td-scannen(){
-  mkdir ~/bin/neuu
-  notify-send 'textdokument-scannen' 'scannen abgebrochen' --icon=simple-scan
-  source /home/markus/bin/td-scannen.cfg
+mkdir ~/bin/neuu
+notify-send 'textdokument-scannen' 'scannen abgebrochen' --icon=simple-scan
+source /home/markus/bin/td-scannen.cfg
 
-  in_optionen=$(zenity --forms --title="Textdokument Scannen und komprimieren" --text="Einstellungen" --separator="," --add-entry="Dateiname" --add-entry="Scanauflösung |75|150|300|600dpi (${resolution})" --add-entry="modus g|gray|grayscale (${mode})" --add-entry="Längste Seite(${max_length})")
+in_optionen=$(zenity --forms --title="Textdokument Scannen und komprimieren" --text="Einstellungen" --separator="," --add-entry="Dateiname" --add-entry="Scanauflösung |75|150|300|600dpi (${resolution})" --add-entry="modus g|gray|grayscale (${mode})" --add-entry="Längste Seite(${max_length})")
 
-  if (($? != 0))
+if (($? != 0))
+then
+  echo "abbruch"
+  exit 1
+fi
+
+in_dateiname=$(awk -F, '{print $1}' <<<$in_optionen)
+in_scanaufloesung=$(awk -F, '{print $2}' <<<$in_optionen)
+in_modus=$(awk -F, '{print tolower($3)}' <<<$in_optionen)
+in_laengsteseite=$(awk -F, '{print $4}' <<<$in_optionen)
+
+
+if [ ${#in_dateiname} -gt 0 ]
+then
+  dateiname="$(pwd)/${in_dateiname}($(date +"%d-%m-%Y_%H:%M:%S")).pnm"
+else
+  dateiname="$(pwd)/${filename}($(date +"%d-%m-%Y_%H:%M:%S")).pnm"
+fi
+
+if [ ${#in_scanaufloesung} -gt 0 ]
+then
+  resolution=${in_scanaufloesung}
+fi
+
+if [ ${#in_laengsteseite} -gt 0 ]
+then
+  max_length=${in_laengsteseite}
+fi
+
+if [ ${#in_modus} -gt 0 ]
+then
+  if [ ${in_modus} = "g" ]  || [ ${in_modus} = "gray" ] || [ ${in_modus} = "grayscale" ]
   then
-    echo "abbruch"
-    exit 1
+    mode="Gray"
+    num_colors=4
   fi
+fi
 
-  in_dateiname=$(awk -F, '{print $1}' <<<$in_optionen)
-  in_scanaufloesung=$(awk -F, '{print $2}' <<<$in_optionen)
-  in_modus=$(awk -F, '{print tolower($3)}' <<<$in_optionen)
-  in_laengsteseite=$(awk -F, '{print $4}' <<<$in_optionen)
+errorstat=$?
 
 
-  if [ ${#in_dateiname} -gt 0 ]
+for ((i=1;i<=${scanversuche};i++))
+do
+  if [ ${i} = 1 ]
   then
-    dateiname="$(pwd)/${in_dateiname}($(date +"%d-%m-%Y_%H:%M:%S")).pnm"
+    notify-send 'textdokument-scannen' 'scannen gestartet' --icon=simple-scan
   else
-    dateiname="$(pwd)/${filename}($(date +"%d-%m-%Y_%H:%M:%S")).pnm"
+    notify-send 'textdokument-scannen' "scannen fehlgeschlagen, starte scannen erneut(${i})" --icon=simple-scan
   fi
 
-  if [ ${#in_scanaufloesung} -gt 0 ]
-  then
-    resolution=${in_scanaufloesung}
-  fi
-
-  if [ ${#in_laengsteseite} -gt 0 ]
-  then
-    max_length=${in_laengsteseite}
-  fi
-
-  if [ ${#in_modus} -gt 0 ]
-  then
-    if [ ${in_modus} = "g" ]  || [ ${in_modus} = "gray" ] || [ ${in_modus} = "grayscale" ]
-    then
-      mode="Gray"
-      num_colors=4
-    fi
-  fi
-
+  ( # the pipe creates an implicit subshell; marking it explicit
+  ( scanimage -p --resolution ${resolution} --mode "${mode}" 2>"$logfile" > "${dateiname}"; echo "100")& echo $!
+  ) | (
+  read PIPED_PID; zenity --progress --title Textdokument scannen --text "Scanning..." --percentage=0 --auto-close --pulsate && exit 0 || kill ${PIPED_PID} && exit 1
+  )
   errorstat=$?
 
-
-  for ((i=1;i<=${scanversuche};i++))
-  do
-    if [ ${i} = 1 ]
+  scannen_fehlgeschlagen=0
+  if [ $errorstat = 0 ]
+  then
+    if grep -q "100" "${logfile}"
     then
-      notify-send 'textdokument-scannen' 'scannen gestartet' --icon=simple-scan
+      scannen_fehlgeschlagen=0
+      echo "scannen erfolgreich"
     else
-      notify-send 'textdokument-scannen' "scannen fehlgeschlagen, starte scannen erneut(${i})" --icon=simple-scan
+      scannen_fehlgeschlagen=1
+      errorstat=1
+      echo "scannen fehlgeschlagen"
     fi
+  fi
 
-    ( # the pipe creates an implicit subshell; marking it explicit
-    ( scanimage -p --resolution ${resolution} --mode "${mode}" 2>"$logfile" > "${dateiname}"; echo "100")& echo $!
-    ) | (
-    read PIPED_PID; zenity --progress --title Textdokument scannen --text "Scanning..." --percentage=0 --auto-close --pulsate && exit 0 || kill ${PIPED_PID} && exit 1
-    )
+  if ( [ $errorstat = 0 ] )
+  then
+    notify-send 'textdokument-scannen' 'scannen abgeschlossen, starte Dateikomprimierung' --icon=simple-scan
+    (gimp -i -b '(skript-fu-scan-verkleinern "'"${dateiname}"'" '${max_length}' '${num_colors}')' -b '(gimp-quit 0)'&& echo "100") |
+    (zenity --progress --title Textdokument scannen --text "Dateikomprimierung..." --percentage=0 --auto-close --pulsate)
     errorstat=$?
-
-    scannen_fehlgeschlagen=0
+    rm "${dateiname}"
     if [ $errorstat = 0 ]
     then
-      if grep -q "100" "${logfile}"
-      then
-        scannen_fehlgeschlagen=0
-        echo "scannen erfolgreich"
-      else
-        scannen_fehlgeschlagen=1
-        errorstat=1
-        echo "scannen fehlgeschlagen"
-      fi
-    fi
-
-    if ( [ $errorstat = 0 ] )
-    then
-      notify-send 'textdokument-scannen' 'scannen abgeschlossen, starte Dateikomprimierung' --icon=simple-scan
-      (gimp -i -b '(skript-fu-scan-verkleinern "'"${dateiname}"'" '${max_length}' '${num_colors}')' -b '(gimp-quit 0)'&& echo "100") |
-      (zenity --progress --title Textdokument scannen --text "Dateikomprimierung..." --percentage=0 --auto-close --pulsate)
-      errorstat=$?
-      rm "${dateiname}"
-      if [ $errorstat = 0 ]
-      then
-        rm "${logfile}"
-        echo "dokument erfolgreich erstellt"
-        notify-send 'textdokument-scannen' 'Dokument erfolgreich erstellt!' --icon=simple-scan
-        exit 0
-      fi
-    elif [ $scannen_fehlgeschlagen = 0 ]
-    then
-      echo "abbruch"
       rm "${logfile}"
-      rm "${dateiname}"
-      notify-send 'textdokument-scannen' 'scannen abgebrochen' --icon=simple-scan
-      exit 1
+      echo "dokument erfolgreich erstellt"
+      notify-send 'textdokument-scannen' 'Dokument erfolgreich erstellt!' --icon=simple-scan
+      exit 0
     fi
-  done
+  elif [ $scannen_fehlgeschlagen = 0 ]
+  then
+    echo "abbruch"
+    rm "${logfile}"
+    rm "${dateiname}"
+    notify-send 'textdokument-scannen' 'scannen abgebrochen' --icon=simple-scan
+    exit 1
+  fi
+done
 
-  rm "${dateiname}"
-  notify-send 'textdokument-scannen' 'scannen gescheitert, Programm wird beendet' --icon=simple-scan
-  exit 1
+rm "${dateiname}"
+notify-send 'textdokument-scannen' 'scannen gescheitert, Programm wird beendet' --icon=simple-scan
+exit 1
 }
