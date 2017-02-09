@@ -1,4 +1,4 @@
-  (define (batch-surface-wavelet-sharpen pattern)
+  (define (batch-surface-sharpen pattern foldername)
   (let* ((filelist (cadr (file-glob pattern 1))))
     (while (not (null? filelist))
            (let* (	(filename (car filelist))
@@ -8,8 +8,8 @@
 			(wval (car (gimp-image-width image)))
 			(hval (car (gimp-image-height image)))
 	   	 )
-	   (plug-in-wavelet-sharpen RUN-NONINTERACTIVE
-                                   image drawable 0.8 0.3 1)
+	   (plug-in-sharpen RUN-NONINTERACTIVE
+                                   image drawable 25)
 
   (if (> wval hval)            ; check if verti
             (gimp-image-scale-full image 1024 768 INTERPOLATION-LANCZOS)
@@ -17,7 +17,9 @@
    (if (< wval hval)            ; check if hori
             (gimp-image-scale-full image 768 1024 INTERPOLATION-LANCZOS)
        )
-             (file-jpeg-save RUN-NONINTERACTIVE
-                             image drawable filename filename 1 0 1 0 "" 2 0 0 2)
-             (gimp-image-delete image))
+	   (plug-in-sharpen RUN-NONINTERACTIVE
+                                   image drawable 10)
+(file-jpeg-save RUN-NONINTERACTIVE
+                             image drawable (string-append foldername filename) (string-append foldername filename) 1 0 1 0 "" 2 0 0 2)
+           )
            (set! filelist (cdr filelist)))))
