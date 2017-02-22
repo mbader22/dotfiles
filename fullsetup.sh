@@ -2,6 +2,7 @@
 
 source ~/dotfiles/makesymlinks.sh
 makesymlinks
+fc-cache  # font cache aktualisieren
 if [ $? = 0 ] ; then
   echo  "software installieren/deinstallieren (j/N)?"
   read -k 1 response
