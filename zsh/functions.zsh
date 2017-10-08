@@ -73,7 +73,7 @@ rechnungen(){
 
 #arch Linux aktualisieren und System herunterfahren
 asd(){
-  packer-color -Syyu --noconfirm --noedit
+  pacaur -Syyu --noconfirm --noedit
   if (($? == 0))
   then
     xfce4-session-logout -h
@@ -84,8 +84,8 @@ a(){
   readonly A_FALSCHE_PARAMETER="von a unterstützte Parameter:\n\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
 
   if [ ${#} -eq 0 ] ; then
-    #packer-color -Syu
-    packer-color -Syyu --noconfirm --noedit
+    #pacaur -Syu
+    pacaur -Syyu --noconfirm --noedit
     if [ "$?" = 0 ] ; then
       notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
       exit 0
@@ -101,7 +101,7 @@ a(){
     else
       if [ "${1}" = "-a" ]
       then
-        packer-color -Syyu --noconfirm --noedit
+        pacaur -Syyu --noconfirm --noedit
         if [ $? = 0 ] ; then
           notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
           exit 0
