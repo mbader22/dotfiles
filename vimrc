@@ -26,9 +26,9 @@ syntax on
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set relativenumber
+"set relativenumber
 set autoindent
-
+set regexpengine=1
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","

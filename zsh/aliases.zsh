@@ -5,6 +5,9 @@ alias aliases="vim ~/dotfiles/zsh/aliases.zsh"
 alias functions="vim ~/dotfiles/zsh/functions.zsh"
 alias m="mplayer"
 
+#InvoicePlane
+alias invoiceplaneUpdate="rm application/config/database.php application/language/German/custom_lang.php && rm -r application/views/ && ln -s ~/public_html/ip_dotfiles/application/config/database.php application/config/database.php && ln -s ~/public_html/ip_dotfiles/application/language/German/custom_lang.php application/language/German/custom_lang.php && cp -rs ~/public_html/ip_dotfiles/application/views application/views && cp  ~/public_html/ip_dotfiles/ipconfig.php ipconfig.php && sudo chmod a+w -R uploads application/logs && sudo chmod a+w ipconfig.php && sudo chmod a+w -R vendor/mpdf/mpdf/tmp && echo 'http://localhost/~markus/${PWD##*/}/index.php/setup oeffnen' "
+
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -12,6 +15,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 
+#MariaDB
+alias MariaDBBackup="mysqldump --single-transaction --flush-logs --master-data=2 --all-databases -u root -p | gzip > /home/markus/Documents/Arbeiten/InvoicePlane/Backup/all_databases-`date +%d-%m-%Y`.sql.gz"
 
 # expand /tmp directory temporarily
 alias tmpResizeTo4M="sudo mount -o remount,size=4G,noatime /tmp"
