@@ -73,7 +73,7 @@ rechnungen(){
 
 #arch Linux aktualisieren und System herunterfahren
 asd(){
-  pacaur -Syyu --noconfirm --noedit
+  pacaur -Syu --noconfirm --noedit
   if (($? == 0))
   then
     xfce4-session-logout -h
@@ -85,7 +85,7 @@ a(){
 
   if [ ${#} -eq 0 ] ; then
     #pacaur -Syu
-    pacaur -Syyu --noconfirm --noedit
+    pacaur -Syu --noconfirm --noedit
     if [ "$?" = 0 ] ; then
       notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
       exit 0
@@ -101,7 +101,7 @@ a(){
     else
       if [ "${1}" = "-a" ]
       then
-        pacaur -Syyu --noconfirm --noedit
+        pacaur -Syu --noconfirm --noedit
         if [ $? = 0 ] ; then
           notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
           exit 0

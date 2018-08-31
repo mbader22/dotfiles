@@ -12,10 +12,10 @@
                                    image drawable 25)
 
   (if (> wval hval)            ; check if verti
-            (gimp-image-scale-full image 1366 768 INTERPOLATION-LANCZOS)
+            (gimp-image-scale-full image 1156 768 INTERPOLATION-LANCZOS)
        )
    (if (< wval hval)            ; check if hori
-            (gimp-image-scale-full image 768 1366 INTERPOLATION-LANCZOS)
+            (gimp-image-scale-full image 768 1156 INTERPOLATION-LANCZOS)
        )
 	   (plug-in-sharpen RUN-NONINTERACTIVE
                                    image drawable 10)
