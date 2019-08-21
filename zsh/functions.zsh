@@ -54,22 +54,6 @@ homepage(){
   notify-send 'Homepage' 'Vorschaubilder vollständig erstellt!' --icon=dialog-information
 }
 
-#Rechnungen erstellen
-rechnungen(){
-  if [ ${#} -eq 0 ]
-  then
-    echo ".tex Datei als Parameter angeben!"
-  else
-    if [ ${#} -eq 1 ]
-    then
-      vim ${1}
-      lat2pdf ${1}
-      exit 0
-    else
-      echo ".tex Datei als Parameter angeben!"
-    fi
-  fi
-}
 
 #arch Linux aktualisieren und System herunterfahren
 asd(){
@@ -84,8 +68,8 @@ a(){
   readonly A_FALSCHE_PARAMETER="von a unterstützte Parameter:\n\n-a auffrischen der kompletten Package Listen mit anschließenden System Upgrade\n"
 
   if [ ${#} -eq 0 ] ; then
-    #pacaur -Syu
-    pacaur -Syu --noconfirm --noedit
+    #yay -Syu
+    yay -Syu --noconfirm --noedit
     if [ "$?" = 0 ] ; then
       notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
       exit 0
@@ -101,7 +85,7 @@ a(){
     else
       if [ "${1}" = "-a" ]
       then
-        pacaur -Syu --noconfirm --noedit
+        yay -Syu --noconfirm --noedit
         if [ $? = 0 ] ; then
           notify-send 'Software aktualisieren' 'Systemupdate abgeschlossen' --icon=system-software-update
           exit 0

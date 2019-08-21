@@ -5,6 +5,13 @@ fi
 
 export BASH_DIR=~/.zsh
 
+
 source $BASH_DIR/aliases.zsh
 source $BASH_DIR/functions.zsh
+
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+
 eval "$(dircolors -b ~/.dircolors)"

@@ -16,7 +16,7 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 
 #MariaDB
-alias MariaDBBackup="mysqldump --single-transaction --flush-logs --master-data=2 --all-databases -u root -p | gzip > /home/markus/Documents/Arbeiten/InvoicePlane/Backup/all_databases-`date +%d-%m-%Y`.sql.gz"
+alias MariaDBBackup="mysqldump --single-transaction --flush-logs --master-data=2 --all-databases -u root -p | gzip > /home/markus/Documents/Arbeiten/InvoicePlane/Backup/all_databases-`date +%Y-%m-%d`.sql.gz"
 
 # expand /tmp directory temporarily
 alias tmpResizeTo4M="sudo mount -o remount,size=4G,noatime /tmp"
