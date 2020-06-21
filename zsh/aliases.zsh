@@ -15,8 +15,15 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 
+#grive
+alias grive2="grive --id 230690228363-da68fv3rfv2l7tug6umvd6ckfe9lb7n0.apps.googleusercontent.com --secret 2DRt4ige636haDLnsT76g90M"
+
 #MariaDB
-alias MariaDBBackup="mysqldump --single-transaction --flush-logs --master-data=2 --all-databases -u root -p | gzip > /home/markus/Documents/Arbeiten/InvoicePlane/Backup/all_databases-`date +%Y-%m-%d`.sql.gz"
+alias MariaDBBackup="mysqldump  --all-databases -u root -p | gzip > /home/markus/gdrive-Markus/Documents/Arbeiten/InvoicePlane/Backup/all_databases-`date +%Y-%m-%d`.sql.gz"
+#alias MariaDBBackup="mysqldump --single-transaction --flush-logs --master-data=2 --all-databases -u root -p | gzip > /home/markus/Documents/Arbeiten/InvoicePlane/Backup/all_databases-`date +%Y-%m-%d`.sql.gz"
+
+#2fa
+alias 2fa=~/.2fa/decrypt.key.sh
 
 # expand /tmp directory temporarily
 alias tmpResizeTo4M="sudo mount -o remount,size=4G,noatime /tmp"

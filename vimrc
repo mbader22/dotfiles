@@ -29,10 +29,19 @@ set expandtab
 set relativenumber
 set autoindent
 set regexpengine=1
+
+" vimwiki with markdown support
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" vim-instant-markdown - Instant Markdown preview from vim
+let g:instant_markdown_autostart = 0
+" map instant markdown preview to ',md'
+map <leader>md :InstantMarkdownPreview<CR>
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+"let mapleader = ","
+"let g:mapleader = ","
 
 " Turn on the WiLd menu
 set wildmenu
